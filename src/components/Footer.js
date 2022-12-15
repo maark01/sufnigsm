@@ -13,11 +13,11 @@ export default function Footer() {
                 {socialMediaElements.map(element => (
                     <span key={element.name} style={{ cursor: "pointer" }}
                         onClick={() => window.location.href = element.href}>
-                        <box-icon type="logo" name={element.icon} color="white" size="lg" animation="tada-hover"></box-icon>
+                        <box-icon type="logo" name={element.icon} color="#fbead9" size="lg" animation="tada-hover"></box-icon>
                     </span>
                 ))}
             </div>
-            <p>SufniGSM &copy; 2022</p>
+            <p>Sufni-GSM &copy; 2022</p>
         </div>
     )
 }
