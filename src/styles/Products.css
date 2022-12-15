@@ -1,0 +1,31 @@
+
+.item-cards {
+    width: 400px;
+    margin: 10px;
+    border-radius: 1rem;
+}
+
+.item-cards.active {
+    background-color: lightblue;
+    color: white;
+}
+
+.item-cards.none {
+    background-color: #fbead9;
+    color: black;
+}
+
+.item-cards button {
+    margin: 1rem 0;
+    padding: 0 50px;
+}
+
+.item-img {
+    margin: 10px 0;
+    border-radius: 1rem;
+}
+
+.item-body, .item-title p {
+    text-align: center;
+}
+
