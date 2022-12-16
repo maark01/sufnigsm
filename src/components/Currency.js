@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import "../styles/Currency.css"
 
 export default function Currency() {
 
@@ -28,13 +28,13 @@ export default function Currency() {
     }
 
     return (
-        <>
-            <select className="currency form-select d-flex mx-auto w-25" onChange={handleFiatChange}>
+        <div className="currency">
+            <select className="currency-select form-select d-flex mx-auto" onChange={handleFiatChange}>
                 {
                     currencyOptions.map(fiat => <option key={fiat.name} name={fiat.name} symbol={fiat.symbol} value={fiat.rate}>{fiat.name}</option>)
 
                 }
             </select>
-        </>
+        </div>
     )
 }

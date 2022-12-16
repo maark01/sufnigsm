@@ -1,0 +1,17 @@
+.error {
+    height: 77.3vh;
+    display:inline-flex;
+    align-items: center;
+} 
+
+.error .error-msg {
+    font-weight: 800;
+    color: #fbead9;
+    margin: 0 50px;
+}
+
+.error .error-img {
+    height: 40%;
+    border-radius: 2rem;
+}
+

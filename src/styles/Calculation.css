@@ -1,8 +1,17 @@
-form {
+.container-expand {
+    background-image: url("../assets/calculateLg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form {
     width: 500px;
     border-radius: 1rem;
     padding: 1rem;
     background-color: #fbead9;
+    opacity: 0.8;
+    font-weight: bold;
 }
 
 .form, input {
@@ -17,4 +26,49 @@ form {
 .form button {
     margin: 1rem 0;
     padding: 0 50px;
+    background-color: rgb(77, 59, 55) !important;
+    color: #fbead9;
+    font-weight: bold;
+}
+
+.phone-col{
+    width: 400px;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: #fbead9;
+    opacity: 0.8;
+}
+
+.phone-col .phone-title {
+    text-align: center;
+}
+
+.phone-col, .phone-detail {
+    font-weight: bold;
+}
+
+@media (max-width: 576px) {
+
+    .row {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .row {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+@media (min-width: 768px) {
+
+    .row {
+        display: flex;
+        justify-content: center;
+    }
 }

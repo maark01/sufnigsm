@@ -5,10 +5,11 @@ import { useContext, useState } from "react"
 import CustomMotion from "../components/CustomMotion"
 import Currency from "../components/Currency"
 
+
 export default function Calculation(props) {
 
 
-    const [phones, setPhones] = useState([])
+    const [phones, setPhones] = useState(null)
     const { activeItem, setActiveItem } = useContext(ChosenItemContext)
 
     let condition = Math.floor(Math.random() * 100)
@@ -29,7 +30,8 @@ export default function Calculation(props) {
             },
             url: "https://softcamp.hu/webler/arkalkulator.php",
             responseType: "json",
-        }).then((response) => { setPhones(response.data.data) }).catch(err => setPhones(err))
+        }).then((response) => { response.data.error === null ? setPhones(response.data.data) : alert(response.data.error); console.log(response.data); console.log(response.data.details) }).catch(error => { ("Server Error") });
+
     }
 
     /*
@@ -72,48 +74,52 @@ export default function Calculation(props) {
 
     return (
 
-        <CustomMotion className="container">
-            <div className="row">
-                <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                    <form className="form my-5 mx-auto" onSubmit={handleSubmit}>
+        <CustomMotion>
+            <div className="calculation container-expand">
+                <div className="row">
+                    <div className="form-col col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <form className="form my-5 mx-auto" onSubmit={handleSubmit}>
 
-                        <label className="form-label" htmlFor="brand">Brand</label>
-                        <input className="form-control" type="text" name="brand" defaultValue={activeItem ? activeItem.brand : ""} required autoComplete="none" />
+                            <label className="form-label" htmlFor="brand">Brand</label>
+                            <input className="form-control" type="text" name="brand" defaultValue={activeItem ? activeItem.brand : ""} required autoComplete="none" placeholder="Please, add the brand..." />
 
-                        <label className="form-label" htmlFor="model">Model</label>
-                        <input className="form-control" type="text" name="model" defaultValue={activeItem ? activeItem.model : ""} required autoComplete="none" />
+                            <label className="form-label" htmlFor="model">Model</label>
+                            <input className="form-control" type="text" name="model" defaultValue={activeItem ? activeItem.model : ""} required autoComplete="none" placeholder="Please, add the model..." />
 
-                        <label className="form-label" htmlFor="os">Operating System</label>
-                        <input className="form-control" type="text" name="os" defaultValue={activeItem ? activeItem.os : ""} required autoComplete="none" />
+                            <label className="form-label" htmlFor="os">Operating System</label>
+                            <input className="form-control" type="text" name="os" defaultValue={activeItem ? activeItem.os : ""} required autoComplete="none" placeholder="Please, add the operating system..." />
 
-                        <label className="form-label" htmlFor="startPrice">Start Price</label>
-                        <input className="form-control" type="number" name="startPrice" defaultValue={activeItem ? activeItem.startPrice : ""} required autoComplete="none" />
+                            <label className="form-label" htmlFor="startPrice">Start Price</label>
+                            <input className="form-control" type="number" name="startPrice" defaultValue={activeItem ? activeItem.startPrice : ""} required autoComplete="none" placeholder="Please, add the starting price..." />
 
-                        <label className="form-label" htmlFor="releaseYear">Release Year</label>
-                        <input className="form-control" type="number" name="releaseYear" defaultValue={activeItem ? activeItem.releaseYear : ""} required autoComplete="none" />
+                            <label className="form-label" htmlFor="releaseYear">Release Year</label>
+                            <input className="form-control" type="number" name="releaseYear" defaultValue={activeItem ? activeItem.releaseYear : ""} required autoComplete="none" placeholder="Please, add the release year..." />
 
-                        <label className="form-label" htmlFor="score">Score</label>
-                        <input className="form-control" type="number" name="score" defaultValue={activeItem ? activeItem.score : ""} required autoComplete="none" />
+                            <label className="form-label" htmlFor="score">Score</label>
+                            <input className="form-control" type="number" name="score" defaultValue={activeItem ? activeItem.score : ""} min={0} max={10} required autoComplete="none" placeholder="Please, add the score..." />
 
-                        <label className="form-label" htmlFor="score">Condition</label>
-                        <input className="form-control" type="number" name="condition" defaultValue={condition} required autoComplete="none" />
+                            <label className="form-label" htmlFor="score">Condition</label>
+                            <input className="form-control" type="number" name="condition" defaultValue={condition} min={0} max={100} required autoComplete="none" placeholder="Please, add the condition..." />
 
-                        <button className="btn btn-success d-flex mx-auto" type="submit">Submit</button>
-                    </form>
+                            <button className="btn btn-danger d-flex mx-auto" type="submit">Calculate</button>
+                        </form>
+                    </div>
+
+                    <div className="phone-col col-sm-12 col-md-12 col-lg-6 col-xl-6 my-5" >
+                        <h2 className="phone-title">Our Quotation For You</h2>
+                        {phones && <div className="phone-offer">
+                            <p className="phone-detail">Appliance: {phones.brand} {phones.model}</p>
+                            <p className="phone-detail">Operating System: {phones.os}</p>
+                            <p className="phone-detail">Release Year: {phones.releaseYear}</p>
+                            <p className="phone-detail">Recommended Price: {phones.recommendedPrice} </p>
+                            {phones.details.map(detail => <div><p>{detail.year}</p> <p>{detail.price}</p></div>)}
+
+                            <Currency />
+                        </div>}
+                    </div>
                 </div>
-
             </div>
 
-            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <div>
-                    <p>{phones.brand} {phones.model}</p>
-                    <p>{phones.os}</p>
-                    <p>{phones.releaseYear}</p>
-                    <p>{phones.recommendedPrice}</p>
-                </div>
-            </div>
-
-            <Currency />
         </CustomMotion>
 
     )
